@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "projects": {
+    "css-layouts": {
+      "projectType": "application",
+      "root": "apps/css-layouts",
+      "sourceRoot": "apps/css-layouts/src",
+      "prefix": "csslayouts",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/css-layouts",
+            "index": "apps/css-layouts/src/index.html",
+            "main": "apps/css-layouts/src/main.ts",
+            "polyfills": "apps/css-layouts/src/polyfills.ts",
+            "tsConfig": "apps/css-layouts/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/css-layouts/src/favicon.ico",
+              "apps/css-layouts/src/assets"
+            ],
+            "styles": ["apps/css-layouts/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/css-layouts/src/environments/environment.ts",
+                  "with": "apps/css-layouts/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "css-layouts:build:production"
+            },
+            "development": {
+              "browserTarget": "css-layouts:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "css-layouts:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/css-layouts/src/**/*.ts",
+              "apps/css-layouts/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/css-layouts"],
+          "options": {
+            "jestConfig": "apps/css-layouts/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "css-layouts-e2e": {
+      "root": "apps/css-layouts-e2e",
+      "sourceRoot": "apps/css-layouts-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/css-layouts-e2e/cypress.json",
+            "devServerTarget": "css-layouts:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "css-layouts:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/css-layouts-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["css-layouts"]
+    }
+  }
+}
