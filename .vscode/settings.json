@@ -1,0 +1,5 @@
+{
+    "prettier.vueIndentScriptAndStyle": true,
+    "typescript.extension.sortImports.sortOnSave": true,
+    "editor.formatOnSave": true
+}

@@ -1,1 +1,16 @@
-<csslayouts-nx-welcome></csslayouts-nx-welcome>
+<div class="header">
+  <h1>10 1-liner layouts</h1>
+</div>
+<div class="content">
+  <div class="nav">
+    <div
+      class="nav-item"
+      [ngClass]="{ active: activeLayout === layout.component }"
+      (click)="setActiveLayout(layout)"
+      *ngFor="let layout of layouts"
+    >
+      {{ layout.title }}
+    </div>
+  </div>
+  <div class="display"></div>
+</div>
